@@ -1,0 +1,237 @@
+/* ============================================
+   心诚则灵 · 古风圆角样式表
+   ============================================ */
+
+@font-face{
+  font-family:'Zpix';
+  src:url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@latest/dist/Zpix.woff2') format('woff2');
+  font-display:swap;
+}
+
+/* ============ 视觉变量 ============ */
+:root{
+  --bg:#0f0a06;
+  --panel:#1a120a;
+  --panel-in:#241811;
+  --line:#3a2a16;
+  --gold:#c9a86a;
+  --gold-b:#e8c877;
+  --gold-d:#8a7446;
+  --text:#e0cfa8;
+  --dim:#9a8a66;
+  --muted:#6d5f45;
+  --red:#c0392b;
+  --red-d:#8e2418;
+  --red-b:#e05a45;
+  --radius:14px;
+  --radius-sm:10px;
+  --radius-lg:20px;
+  --px:'Zpix','Courier New',monospace;
+  --serif:'Zpix','Noto Serif SC','Songti SC','SimSun',serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--px);
+  min-height:100vh;
+  line-height:1.5;
+}
+
+/* 细微噪点背景 */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.12) 3px,rgba(0,0,0,.12) 4px);
+  opacity:.3;
+}
+
+/* 八卦漂移水印 */
+.bg-wm{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06}
+.wm{position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;will-change:transform}
+.wm .wb{width:44px;height:5px;background:var(--gold);border-radius:2px}
+.wm .wb.y{background:transparent;background-image:linear-gradient(90deg,var(--gold) 0 12px,transparent 12px 20px,var(--gold) 20px 32px,transparent 32px 40px,var(--gold) 40px 44px)}
+.wm .lbl{font-size:9px;color:var(--gold-d);letter-spacing:1px}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,14px)}}
+
+.wrap{position:relative;z-index:1;max-width:460px;margin:0 auto;padding:22px 16px calc(60px + env(safe-area-inset-bottom, 0px))}
+.screen{display:none}
+.screen.active{display:block}
+
+/* ============ 首页 ============ */
+.h-title{text-align:center;font-family:var(--serif);font-size:30px;color:var(--gold-b);letter-spacing:12px;margin:26px 0 6px;text-shadow:0 2px 8px rgba(201,168,106,.3)}
+.h-remain{text-align:center;font-size:12px;color:var(--gold);letter-spacing:2px;margin-bottom:28px}
+
+.px-panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  padding:22px 20px;
+  margin-bottom:18px;
+}
+.px-title{font-size:15px;color:var(--gold-b);letter-spacing:4px;text-align:center;margin-bottom:16px;font-family:var(--serif)}
+.px-sub{font-size:11px;color:var(--muted);text-align:center;letter-spacing:3px;margin-bottom:16px}
+
+.rule{font-family:var(--serif);font-size:14px;color:var(--dim);line-height:2;letter-spacing:1px;text-align:center;margin:6px 0}
+.rule b{color:var(--gold)}
+
+.q-wrap{margin:20px 0 6px}
+.q-wrap label{display:block;font-size:11px;color:var(--gold);letter-spacing:3px;margin-bottom:10px}
+textarea.q{
+  width:100%;min-height:110px;resize:vertical;
+  background:#0e0805;border:1px solid var(--line);color:var(--text);
+  font-family:var(--serif);font-size:16px;padding:14px;line-height:1.7;outline:none;
+  border-radius:var(--radius-sm);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.4);
+  transition:border-color .2s;
+}
+textarea.q:focus{border-color:var(--gold-d)}
+textarea.q::placeholder{color:var(--muted)}
+.hint{font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:8px;white-space:nowrap;text-align:center}
+.err{font-size:12px;color:var(--red-b);min-height:1em;margin-top:8px;letter-spacing:1px}
+
+/* ============ 按钮 ============ */
+.px-btn{
+  display:block;width:100%;padding:14px;margin-top:16px;
+  background:linear-gradient(180deg,var(--red-b),var(--red));color:#fff;
+  border:none;border-radius:var(--radius);
+  font-family:var(--px);font-size:16px;letter-spacing:6px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(192,57,43,.3);
+  text-align:center;text-indent:6px;
+  transition:transform .15s, box-shadow .15s;
+}
+.px-btn:active{transform:translateY(2px);box-shadow:0 2px 6px rgba(192,57,43,.3)}
+.px-btn:disabled{opacity:.5;cursor:not-allowed}
+.px-btn.dark{
+  background:linear-gradient(180deg,#4a3a22,var(--line));
+  color:var(--dim);letter-spacing:3px;font-size:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);
+}
+.px-btn.dark:active{transform:translateY(2px);box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.btn-row{display:flex;gap:12px;margin-top:16px}
+.btn-row .px-btn{margin-top:0;flex:1}
+.btn-row .px-btn:only-child{flex:1}
+
+/* ============ 静心页 ============ */
+.mind{text-align:center;padding:30px 0 10px}
+.mind-num{font-size:68px;color:var(--gold-b);letter-spacing:4px;font-family:var(--serif);text-shadow:0 0 20px rgba(232,200,119,.4)}
+.mind-tip{font-size:11px;color:var(--dim);letter-spacing:3px;margin-top:18px}
+.breath{width:96px;height:96px;margin:0 auto 26px;border:2px solid var(--gold-d);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;animation:breathe 3.4s ease-in-out infinite;
+  box-shadow:0 0 24px rgba(201,168,106,.2)}
+.breath span{font-family:var(--serif);font-size:34px;color:var(--gold-b)}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+/* ============ 摇卦页 ============ */
+.shake-head{text-align:center;font-size:20px;color:var(--gold-b);letter-spacing:4px;margin-bottom:4px;font-family:var(--serif)}
+.shake-prog{text-align:center;font-size:12px;color:var(--dim);letter-spacing:2px;margin-bottom:18px}
+.shake-panel{display:flex;flex-direction:column;min-height:78vh}
+.shake-lines{display:flex;flex-direction:column;gap:18px;margin:6px 0 22px;flex:1;justify-content:center}
+.shake-row{display:flex;align-items:center;justify-content:center;gap:16px}
+.shake-row .pos{width:22px;text-align:center;color:var(--gold);font-size:15px;font-family:var(--serif)}
+.shake-row .num{width:22px;text-align:center;color:var(--gold-b);font-size:15px;font-weight:700}
+.shake-row .yao{width:150px;height:9px;background:var(--gold-b);border-radius:4px}
+.shake-row .yao.yin{background:transparent;background-image:linear-gradient(90deg,var(--gold-b) 0 67px,transparent 67px 83px,var(--gold-b) 83px 150px)}
+.shake-row .yao.dong{background:var(--red-b);animation:yaoBlink 1.2s ease-in-out infinite;border-radius:4px}
+.shake-row .yao.yin.dong{background:transparent;background-image:linear-gradient(90deg,var(--red-b) 0 67px,transparent 67px 83px,var(--red-b) 83px 150px);animation:yaoBlink 1.2s ease-in-out infinite}
+.shake-row .yao.empty{background:transparent}
+.shake-row.between{margin-top:22px}
+@keyframes yaoBlink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* 铜钱 */
+.coins{display:flex;justify-content:center;gap:24px;margin:18px 0 8px}
+.coin{width:58px;height:58px;border-radius:50%;
+  background:radial-gradient(circle at 36% 32%,#f0d078,#d4a544 50%,#9a6a18 82%,#7a5212);
+  border:3px solid #6b4a14;position:relative;
+  box-shadow:inset 0 -3px 6px rgba(0,0,0,.45),inset 0 2px 3px rgba(255,255,255,.25),0 4px 12px rgba(0,0,0,.5);
+  transition:transform .45s ease, opacity .3s ease}
+.coin::after{content:'';position:absolute;left:50%;top:50%;width:13px;height:13px;
+  transform:translate(-50%,-50%) rotate(45deg);background:#1a1208;border:1px solid #3a2a0e;
+  border-radius:2px;
+  box-shadow:inset 0 0 2px #000;z-index:2}
+.coin.tail{opacity:.55}
+.coin.flip{animation:coinFlip .5s ease}
+@keyframes coinFlip{0%{transform:rotateY(0)}50%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
+.shake-msg{text-align:center;font-size:13px;color:var(--gold-b);letter-spacing:2px;margin:10px 0 4px;font-family:var(--serif)}
+.shake-msg .done{color:var(--red-b);font-size:15px}
+
+/* ============ 结果页 ============ */
+.res-head{text-align:center;margin-bottom:2px}
+.res-head .big{font-size:24px;color:var(--gold-b);letter-spacing:6px;font-family:var(--serif);text-shadow:0 0 16px rgba(232,200,119,.3)}
+.res-head .small{font-size:11px;color:var(--dim);letter-spacing:1px;margin-top:2px}
+.dong-note{text-align:center;font-size:12px;color:var(--red-b);margin:8px 0 10px;letter-spacing:1px;font-family:var(--serif)}
+.gua-block{background:var(--panel-in);border:1px solid var(--line);border-radius:var(--radius);padding:14px 12px 12px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.gua-block .gb-tag{font-size:10px;color:var(--gold-d);letter-spacing:4px;text-align:center;margin-bottom:6px}
+.gua-block .gb-name{font-size:22px;color:var(--gold-b);letter-spacing:6px;text-align:center;font-family:var(--serif);margin-bottom:12px;text-indent:6px}
+
+/* 六爻爻线图 */
+.gua-yao{display:flex;flex-direction:column;align-items:center;gap:26px;margin:8px 0}
+.gua-yao .cluster{display:flex;flex-direction:column;gap:14px;align-items:center}
+.gua-yao .cluster-wrap{display:flex;align-items:center;justify-content:center;gap:16px}
+.gua-yao .tri-xiang{font-family:var(--px);font-size:20px;color:var(--gold);width:24px;text-align:center;line-height:1}
+.gua-yao .tri-nw{font-family:var(--px);font-size:14px;color:var(--dim);width:20px;text-align:center;line-height:1;opacity:.7}
+.gua-yao .gline{width:120px;height:8px;background:var(--gold-b);border-radius:4px}
+.gua-yao .gline.yin{background:transparent;background-image:linear-gradient(90deg,var(--gold-b) 0 53px,transparent 53px 67px,var(--gold-b) 67px 120px)}
+.gua-yao .gline.dong{background:var(--red-b);animation:yaoBlink 1.2s ease-in-out infinite;border-radius:4px}
+.gua-yao .gline.yin.dong{background:transparent;background-image:linear-gradient(90deg,var(--red-b) 0 53px,transparent 53px 67px,var(--red-b) 67px 120px);animation:yaoBlink 1.2s ease-in-out infinite}
+
+/* ============ 历史记录 ============ */
+.his-item{background:var(--panel-in);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer;transition:border-color .2s,transform .15s}
+.his-item:active{border-color:var(--gold);transform:scale(.98)}
+.his-item .q{font-family:var(--serif);font-size:14px;color:var(--text);margin-bottom:4px}
+.his-item .meta{font-size:10px;color:var(--muted);margin-bottom:10px;letter-spacing:1px}
+.his-body{display:flex;align-items:center;gap:16px;justify-content:center}
+.his-body .bname{font-size:14px;color:var(--gold-b);font-family:var(--serif);letter-spacing:2px}
+.his-body .gua-yao{gap:7px;margin:0}
+.his-body .gua-yao .cluster{gap:5px}
+.his-body .gua-yao .tri-xiang{display:none}
+.his-body .gua-yao .tri-nw{display:none}
+.his-body .gua-yao .gline{width:56px;height:5px;border-radius:3px}
+.his-body .gua-yao .gline.yin{background:transparent;background-image:linear-gradient(90deg,var(--gold-b) 0 24px,transparent 24px 32px,var(--gold-b) 32px 56px)}
+.his-body .gua-yao .gline.yin.dong{background:transparent;background-image:linear-gradient(90deg,var(--red-b) 0 24px,transparent 24px 32px,var(--red-b) 32px 56px)}
+.empty-tip{text-align:center;color:var(--muted);font-size:13px;padding:30px 0;letter-spacing:2px}
+
+/* ============ 底部 ============ */
+.foot{text-align:center;font-size:10px;color:var(--muted);margin-top:26px;letter-spacing:2px;line-height:1.9}
+.foot .sep{color:var(--gold-d);letter-spacing:0}
+.foot a{color:var(--gold);text-decoration:underline;cursor:pointer}
+
+/* ============ 弹窗 ============ */
+.donate-mask{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(4px);z-index:99;display:none;align-items:center;justify-content:center;padding:20px}
+.donate-mask.show{display:flex}
+.donate-box{background:var(--panel);border:1px solid var(--gold-d);border-radius:var(--radius-lg);padding:22px 20px;max-width:340px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.6);text-align:center;max-height:85vh;overflow-y:auto}
+.donate-title{font-family:var(--px);font-size:18px;color:var(--gold-b);letter-spacing:4px;margin-bottom:16px}
+.donate-qr{display:flex;justify-content:center;margin-bottom:14px}
+.donate-qr img,.donate-qr svg{border-radius:var(--radius-sm)}
+.donate-note{font-family:var(--px);font-size:12px;color:var(--text);line-height:1.9;margin-bottom:12px}
+.donate-law{font-size:10px;color:var(--muted);line-height:1.8;border-top:1px dashed var(--line);padding-top:10px;text-align:left}
+
+.rule-mask{position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.rule-mask.show{display:flex}
+.rule-box{background:var(--panel);border:1px solid var(--gold-d);border-radius:var(--radius-lg);padding:24px 18px;max-width:360px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.6);text-align:center;max-height:85vh;overflow-y:auto}
+.rule-title{font-family:var(--px);font-size:22px;color:var(--gold-b);letter-spacing:6px;margin-bottom:20px;text-indent:6px;text-shadow:0 0 16px rgba(232,200,119,.3)}
+.rule-group{border:1px solid var(--gold-d);border-radius:var(--radius-sm);background:var(--panel-in);padding:14px;margin-bottom:14px}
+.rule-group-title{font-family:var(--serif);font-size:15px;color:var(--gold-b);letter-spacing:4px;text-align:center;margin-bottom:12px;padding-bottom:8px;border-bottom:1px dashed var(--gold-d)}
+.rule-line{font-family:var(--serif);font-size:14px;color:var(--text);line-height:1.8;letter-spacing:1px;margin:8px 0}
+.rule-line b{color:var(--gold-b);font-size:15px}
+.rule-line .desc{display:block;color:var(--dim);font-size:12px;line-height:1.7;margin-top:2px}
+
+/* ============ 响应式 ============ */
+@media (max-width:520px){
+  .wrap{padding:14px 12px calc(44px + env(safe-area-inset-bottom, 0px))}
+  .px-panel{padding:16px 14px}
+  .btn-row{flex-direction:column;gap:10px}
+  .gua-yao .gline{width:104px;height:7px}
+  .gua-yao .gline.yin{background:transparent;background-image:linear-gradient(90deg,var(--gold-b) 0 46px,transparent 46px 58px,var(--gold-b) 58px 104px)}
+  .gua-yao .gline.yin.dong{background:transparent;background-image:linear-gradient(90deg,var(--red-b) 0 46px,transparent 46px 58px,var(--red-b) 58px 104px)}
+  .shake-row .yao{width:116px;height:8px}
+  .shake-row .yao.yin{background-image:linear-gradient(90deg,var(--gold-b) 0 51px,transparent 51px 65px,var(--gold-b) 65px 116px)}
+  .shake-row .yao.yin.dong{background-image:linear-gradient(90deg,var(--red-b) 0 51px,transparent 51px 65px,var(--red-b) 65px 116px)}
+  .rule-box{padding:18px 14px}
+  .donate-box{padding:18px 14px}
+  .px-btn{min-height:48px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
